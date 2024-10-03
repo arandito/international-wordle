@@ -1,23 +1,27 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
-const gameStore = {
+const gameStore = makeAutoObservable({
   word: "",
-  guesses: [],
+  guesses: [] as string[],
   currentGuess: 0,
   language: "en",
   difficulty: 1,
   modalVisible: true,
   flipRow: false,
   loading: false,
+
   get won() {
     return this.guesses[this.currentGuess - 1] === this.word;
   },
+
   get lost() {
     return this.currentGuess > 5;
   },
+
   get allGuesses() {
     return this.guesses.slice(0, this.currentGuess).join("").split("");
   },
+
   get exactGuesses() {
     return this.word.split("").filter((letter, i) => {
       return this.guesses
@@ -26,45 +30,58 @@ const gameStore = {
         .includes(letter);
     });
   },
+
   get inexactGuesses() {
     return this.word
       .split("")
       .filter((letter) => this.allGuesses.includes(letter));
   },
+
   init() {
-    this.loading = true;
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+    this.setLoading(true);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    console.log(apiUrl);
     fetch(
       `${apiUrl}/api/go/word?language=${this.language}&difficulty=${this.difficulty}`,
     )
       .then((response) => response.json())
       .then((data) => {
-        this.word = data.word;
-        this.guesses.replace(new Array(6).fill(""));
-        this.currentGuess = 0;
-        console.log(this.word);
+        runInAction(() => {
+          this.word = data.word;
+          this.guesses = new Array(6).fill("");
+          this.currentGuess = 0;
+          console.log(this.word);
+        });
       })
       .catch((error) => {
         console.error("Error fetching word:", error);
       })
       .finally(() => {
-        this.loading = false;
+        this.setLoading(false);
       });
   },
+
+  setLoading(value: boolean) {
+    this.loading = value;
+  },
+
   setLanguage(language: string) {
     this.language = language;
   },
+
   setDifficulty(difficulty: number) {
     this.difficulty = difficulty;
   },
+
   toggleModal() {
     this.modalVisible = !this.modalVisible;
   },
+
   toggleFlipRow() {
     this.flipRow = !this.flipRow;
   },
+
   submitGuess() {
-    // TODO: add error checking api and call it here
     const guessedWord = this.guesses[this.currentGuess];
     if (
       guessedWord.length === 5 &&
@@ -79,29 +96,34 @@ const gameStore = {
       }, 1500);
     }
   },
-  handleKeyup(e) {
+
+  handleKeyup(e: KeyboardEvent) {
     if (this.won || this.lost) {
       return;
     } else if (e.key === "Enter") {
       return this.submitGuess();
     } else if (e.key === "Backspace") {
-      this.guesses[this.currentGuess] = this.guesses[this.currentGuess].slice(
-        0,
-        this.guesses[this.currentGuess].length - 1,
+      this.setGuess(
+        this.guesses[this.currentGuess].slice(
+          0,
+          this.guesses[this.currentGuess].length - 1
+        )
       );
     } else if (
       this.guesses[this.currentGuess].length < 5 &&
       e.key.match(/^[a-zA-Z]$/)
     ) {
-      this.guesses[this.currentGuess] =
-        this.guesses[this.currentGuess] + e.key.toLowerCase();
+      this.setGuess(this.guesses[this.currentGuess] + e.key.toLowerCase());
     }
   },
-  handlePlayAgain: () => {
-    gameStore.toggleModal();
+
+  setGuess(guess: string) {
+    this.guesses[this.currentGuess] = guess;
   },
-};
 
-makeAutoObservable(gameStore);
+  handlePlayAgain() {
+    this.toggleModal();
+  },
+});
 
-export default gameStore
+export default gameStore;
