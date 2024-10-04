@@ -45,6 +45,7 @@ const Home = observer(() => {
 
   return (
     <div className="bg-slate-950 flex flex-col items-center">
+      <title>international wordle</title>
       <div className="flex h-screen max-w-4xl mx-auto flex-col text-white relative overflow-hidden">
         <div className="flex flex-col items-center flex-grow">
           <motion.div
