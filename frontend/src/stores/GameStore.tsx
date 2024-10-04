@@ -1,26 +1,30 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-const gameStore = makeAutoObservable({
-  word: "",
-  guesses: [] as string[],
-  currentGuess: 0,
-  language: "en",
-  difficulty: 1,
-  modalVisible: true,
-  flipRow: false,
-  loading: false,
+class GameStore {
+  word = "";
+  guesses = [] as string[];
+  currentGuess = 0;
+  language = "en";
+  difficulty = 1;
+  modalVisible = true;
+  flipRow = false;
+  loading = false;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
 
   get won() {
     return this.guesses[this.currentGuess - 1] === this.word;
-  },
+  }
 
   get lost() {
     return this.currentGuess > 5;
-  },
+  }
 
   get allGuesses() {
     return this.guesses.slice(0, this.currentGuess).join("").split("");
-  },
+  }
 
   get exactGuesses() {
     return this.word.split("").filter((letter, i) => {
@@ -29,15 +33,15 @@ const gameStore = makeAutoObservable({
         .map((word) => word[i])
         .includes(letter);
     });
-  },
+  }
 
   get inexactGuesses() {
     return this.word
       .split("")
       .filter((letter) => this.allGuesses.includes(letter));
-  },
+  }
 
-  init() {
+  init = () => {
     this.setLoading(true);
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     console.log(apiUrl);
@@ -59,29 +63,29 @@ const gameStore = makeAutoObservable({
       .finally(() => {
         this.setLoading(false);
       });
-  },
+  }
 
-  setLoading(value: boolean) {
+  setLoading = (value: boolean) => {
     this.loading = value;
-  },
+  }
 
-  setLanguage(language: string) {
+  setLanguage = (language: string) => {
     this.language = language;
-  },
+  }
 
-  setDifficulty(difficulty: number) {
+  setDifficulty = (difficulty: number) => {
     this.difficulty = difficulty;
-  },
+  }
 
-  toggleModal() {
+  toggleModal = () => {
     this.modalVisible = !this.modalVisible;
-  },
+  }
 
-  toggleFlipRow() {
+  toggleFlipRow = () => {
     this.flipRow = !this.flipRow;
-  },
+  }
 
-  submitGuess() {
+  submitGuess = () => {
     const guessedWord = this.guesses[this.currentGuess];
     if (
       guessedWord.length === 5 &&
@@ -95,9 +99,9 @@ const gameStore = makeAutoObservable({
         this.toggleFlipRow();
       }, 1500);
     }
-  },
+  }
 
-  handleKeyup(e: KeyboardEvent) {
+  handleKeyup = (e: KeyboardEvent) => {
     if (this.won || this.lost) {
       return;
     } else if (e.key === "Enter") {
@@ -115,15 +119,16 @@ const gameStore = makeAutoObservable({
     ) {
       this.setGuess(this.guesses[this.currentGuess] + e.key.toLowerCase());
     }
-  },
+  }
 
-  setGuess(guess: string) {
+  setGuess = (guess: string) => {
     this.guesses[this.currentGuess] = guess;
-  },
+  }
 
-  handlePlayAgain() {
+  handlePlayAgain = () => {
     this.toggleModal();
-  },
-});
+  }
+}
 
+const gameStore = new GameStore();
 export default gameStore;
