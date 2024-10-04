@@ -47,14 +47,14 @@ const Home = observer(() => {
     <div className="bg-slate-950 flex flex-col items-center">
       <title>international wordle</title>
       <div className="flex h-screen max-w-4xl mx-auto flex-col text-white relative overflow-hidden">
-        <div className="flex flex-col items-center flex-grow">
+        <div className="flex flex-col items-center flex-grow sm:justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center justify-center w-full max-w-lg px-4"
           >
-            <h1 className="text-6xl font-bold mb-5 bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text mt-5 md:mt-0 md:pt-8">
+            <h1 className="text-6xl font-bold mb-5 bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent mt-5 sm:-mt-2 bg-clip-text">
               WORDLE
             </h1>
             <div className="space-y-2 mb-5">

@@ -12,7 +12,7 @@ export default function Keyboard({ store }) {
 
   const KeyButton = ({ children, onClick, className }) => (
     <motion.button
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.10 }}
       whileTap={{ scale: 0.95 }}
       className={`m-0.5 sm:m-1 rounded-md flex items-center justify-center uppercase font-bold ${className}`}
       onClick={onClick}

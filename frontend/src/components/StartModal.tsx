@@ -28,13 +28,13 @@ const StartModal = observer(() => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 flex items-center justify-center bg-slate-950 bg-opacity-70 backdrop-blur-md"
+      className="fixed inset-0 flex items-center justify-center bg-slate-950 bg-opacity-80 backdrop-blur-md"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="bg-slate-950/30 p-8 rounded-2xl shadow-2xl shadow-sky-600/80 w-96 text-white"
+        className="bg-slate-950/25 p-8 rounded-2xl shadow-2xl shadow-sky-600/80 w-96 text-white"
       >
         <h1 className="text-6xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text">
           WORDLE
