@@ -10,8 +10,8 @@ International Wordle is an expansion of the popular "Wordle" game that allows pl
 
 ## Screenshots
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://antonioaranda.dev/images/international-wordle/menu.png" alt="Menu" width="48%">
-  <img src="https://antonioaranda.dev/images/international-wordle/wordle.png" alt="Wordle" width="48%">
+  <img src="https://antoara.com/images/international-wordle/menu.png" alt="Menu" width="48%">
+  <img src="https://antoara.com/images/international-wordle/wordle.png" alt="Wordle" width="48%">
 </div>
 
 ## Tech Stack
