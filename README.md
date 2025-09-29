@@ -1,4 +1,4 @@
-# International Wordle <img src="https://antonioaranda.dev/images/international-wordle/icon.png" width="30" alt="App Icon" style="vertical-align: bottom;">
+# International Wordle <img src="https://antoara.com/images/international-wordle/icon.png" width="30" alt="App Icon" style="vertical-align: bottom;">
 
 International Wordle is an expansion of the popular "Wordle" game that allows players to guess words in multiple languages, varying difficulites, and with unlimited retries
 
