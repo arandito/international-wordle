@@ -1,4 +1,4 @@
-# International Wordle <img src="https://antoara.com/images/international-wordle/icon.png" width="30" alt="App Icon" style="vertical-align: bottom;">
+# International Wordle <img src="https://aranda.xyz/images/international-wordle/icon.png" width="30" alt="App Icon" style="vertical-align: bottom;">
 
 International Wordle is an expansion of the popular "Wordle" game that allows players to guess words in multiple languages, varying difficulites, and with unlimited retries
 
@@ -10,8 +10,8 @@ International Wordle is an expansion of the popular "Wordle" game that allows pl
 
 ## Screenshots
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://antoara.com/images/international-wordle/menu.png" alt="Menu" width="48%">
-  <img src="https://antoara.com/images/international-wordle/wordle.png" alt="Wordle" width="48%">
+  <img src="https://aranda.xyz/images/international-wordle/menu.png" alt="Menu" width="48%">
+  <img src="https://aranda.xyz/images/international-wordle/wordle.png" alt="Wordle" width="48%">
 </div>
 
 ## Tech Stack
